@@ -148,7 +148,7 @@ def create_ui():
     
     ui_instance = HacxWebUI()
     
-    # Custom CSS for hacker terminal theme
+    # Minimal CSS - Simple and clean like ChatGPT
     custom_css = """
     /* Main theme colors */
     :root {
@@ -156,42 +156,78 @@ def create_ui():
         --secondary-color: #00d4ff;
         --bg-dark: #0a0e27;
         --bg-darker: #050810;
-        --text-color: #00ff41;
+        --text-color: #e8e8e8;
         --border-color: #00ff4150;
+        --code-bg: #1e1e1e;
     }
     
     /* Dark background */
     body, .gradio-container {
         background: linear-gradient(135deg, #0a0e27 0%, #050810 100%) !important;
-        font-family: 'Courier New', monospace !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
     }
     
-    /* Chat container */
+    /* Chat container - simple */
     .chatbot {
         background: rgba(10, 14, 39, 0.8) !important;
-        border: 2px solid var(--border-color) !important;
+        border: 1px solid var(--border-color) !important;
         border-radius: 8px !important;
-        box-shadow: 0 0 20px rgba(0, 255, 65, 0.1) !important;
     }
     
-    /* User messages */
+    /* Messages - clean and simple */
+    .message {
+        padding: 16px !important;
+        margin: 8px 0 !important;
+        border-radius: 8px !important;
+        line-height: 1.6 !important;
+    }
+    
     .message.user {
-        background: linear-gradient(135deg, #1a1f3a 0%, #0f1425 100%) !important;
+        background: rgba(26, 31, 58, 0.6) !important;
         border-left: 3px solid var(--secondary-color) !important;
-        color: var(--secondary-color) !important;
-        padding: 12px !important;
-        border-radius: 8px !important;
-        margin: 8px 0 !important;
+        color: #e8e8e8 !important;
     }
     
-    /* Bot messages */
     .message.bot {
-        background: linear-gradient(135deg, #0f1425 0%, #1a1f3a 100%) !important;
+        background: rgba(15, 20, 37, 0.6) !important;
         border-left: 3px solid var(--primary-color) !important;
-        color: var(--primary-color) !important;
-        padding: 12px !important;
-        border-radius: 8px !important;
-        margin: 8px 0 !important;
+        color: #e8e8e8 !important;
+    }
+    
+    /* Code blocks - simple, clean, copyable */
+    pre {
+        background: var(--code-bg) !important;
+        border: 1px solid #333 !important;
+        border-radius: 6px !important;
+        padding: 16px !important;
+        margin: 12px 0 !important;
+        overflow-x: auto !important;
+        font-family: 'Courier New', 'Consolas', monospace !important;
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+    }
+    
+    code {
+        background: var(--code-bg) !important;
+        color: #e8e8e8 !important;
+        padding: 2px 6px !important;
+        border-radius: 3px !important;
+        font-family: 'Courier New', 'Consolas', monospace !important;
+        font-size: 14px !important;
+    }
+    
+    pre code {
+        background: transparent !important;
+        padding: 0 !important;
+        color: #e8e8e8 !important;
+        display: block !important;
+        white-space: pre !important;
+    }
+    
+    /* Remove syntax highlighting colors that interfere with copying */
+    .token, .keyword, .string, .comment, .function, .operator {
+        color: inherit !important;
+        background: transparent !important;
     }
     
     /* Input field */
@@ -200,7 +236,7 @@ def create_ui():
         border: 2px solid var(--border-color) !important;
         color: var(--text-color) !important;
         border-radius: 8px !important;
-        font-family: 'Courier New', monospace !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
     }
     
     .input-text:focus, textarea:focus {
@@ -213,7 +249,6 @@ def create_ui():
         background: linear-gradient(135deg, #1a1f3a 0%, #0f1425 100%) !important;
         border: 2px solid var(--primary-color) !important;
         color: var(--primary-color) !important;
-        font-family: 'Courier New', monospace !important;
         font-weight: bold !important;
         border-radius: 6px !important;
         transition: all 0.3s ease !important;
@@ -223,7 +258,6 @@ def create_ui():
         background: var(--primary-color) !important;
         color: var(--bg-dark) !important;
         box-shadow: 0 0 15px rgba(0, 255, 65, 0.5) !important;
-        transform: translateY(-2px) !important;
     }
     
     /* Dropdown and select */
@@ -249,23 +283,15 @@ def create_ui():
         border-radius: 8px !important;
     }
     
-    /* Status messages */
-    .status-box {
-        background: rgba(10, 14, 39, 0.9) !important;
-        border: 2px solid var(--primary-color) !important;
-        border-radius: 8px !important;
-        padding: 10px !important;
+    /* Headers */
+    h1, h2, h3 {
         color: var(--primary-color) !important;
-        font-family: 'Courier New', monospace !important;
+        text-shadow: 0 0 10px rgba(0, 255, 65, 0.5) !important;
     }
     
-    /* Code blocks */
-    pre, code {
-        background: rgba(5, 8, 16, 0.9) !important;
-        border: 1px solid var(--border-color) !important;
-        border-radius: 4px !important;
-        color: var(--primary-color) !important;
-        font-family: 'Courier New', monospace !important;
+    /* Links */
+    a {
+        color: var(--secondary-color) !important;
     }
     
     /* Scrollbar */
@@ -281,29 +307,6 @@ def create_ui():
     
     ::-webkit-scrollbar-thumb:hover {
         background: var(--secondary-color);
-    }
-    
-    /* Title styling */
-    h1, h2, h3 {
-        color: var(--primary-color) !important;
-        text-shadow: 0 0 10px rgba(0, 255, 65, 0.5) !important;
-        font-family: 'Courier New', monospace !important;
-    }
-    
-    /* Markdown in chat */
-    .markdown-text {
-        color: var(--text-color) !important;
-    }
-    
-    .markdown-text a {
-        color: var(--secondary-color) !important;
-    }
-    
-    /* Panel borders */
-    .panel {
-        border: 2px solid var(--border-color) !important;
-        border-radius: 8px !important;
-        background: rgba(10, 14, 39, 0.6) !important;
     }
     """
     
@@ -375,28 +378,26 @@ def create_ui():
                     connect_btn = gr.Button("🔌 CONNECT", variant="primary")
                 
                 with gr.Accordion("📊 INFO", open=False):
-                    gr.Markdown("""
-                    **Commands:**
-                    - `/help` - Show help
-                    - `/status` - System status
-                    - `/models` - List models
-                    - `/new` - New session
-                    
-                    **Features:**
-                    - Streaming responses
-                    - Code highlighting
-                    - Markdown support
-                    - Copy/paste friendly
-                    """)
+                    info_text = """**Commands:**
+- `/help` - Show help
+- `/status` - System status
+- `/models` - List models
+- `/new` - New session
+
+**Features:**
+- Streaming responses
+- Code highlighting
+- Markdown support
+- Copy/paste friendly"""
+                    gr.Markdown(info_text)
         
         # Footer
-        gr.Markdown("""
-        ---
-        <div style='text-align: center; color: #00ff41; font-family: monospace;'>
-        <b>HacxGPT v2.0</b> | Built with ❤️ by BlackTechX | 
-        <a href='https://github.com/BlackTechX011/Hacx-GPT' style='color: #00d4ff;'>GitHub</a>
-        </div>
-        """)
+        footer_text = """---
+<div style='text-align: center; color: #00ff41; font-family: monospace;'>
+<b>HacxGPT v2.0</b> | Built with love by BlackTechX | 
+<a href='https://github.com/BlackTechX011/Hacx-GPT' style='color: #00d4ff;'>GitHub</a>
+</div>"""
+        gr.Markdown(footer_text)
         
         # Event handlers
         def update_models(provider):
