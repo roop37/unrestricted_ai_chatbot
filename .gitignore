@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.env
+.hacx
+hacxgpt_code_output/
+build/
+dist/
+*.egg-info/
